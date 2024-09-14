@@ -1,27 +1,48 @@
 import { BrowserRouter } from "react-router-dom";
 
-import { About, Contact, Experience, Feedbacks, Hero, Navbar, Tech, Works, StarsCanvas } from "./components";
-
+import {
+  Hero,
+  Navbar,
+  Contact,
+  CanvasLoader,
+  EarthCanvas,
+  BallCanvas,
+  ComputersCanvas,
+} from "./components";
+import Login from "./components/auth/Login";
+import { useState } from "react";
+import { GoogleLogin } from "@react-oauth/google";
 const App = () => {
+  const [isModalOpen, setIsModalOpen] = useState(true);
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // Handle form submission logic here
+    console.log("Form submitted");
+    closeModal();
+  };
   return (
     <BrowserRouter>
-      <div className='relative z-0 bg-primary'>
-        <div className='bg-hero-pattern bg-cover bg-no-repeat bg-center'>
+      <div className="relative z-0 bg-primary">
+        <div className="bg-hero-pattern bg-cover bg-no-repeat bg-center">
+          {/* <Login
+            isOpen={isModalOpen}
+            onClose={closeModal}
+            onSubmit={handleSubmit}
+          /> */}
+
           <Navbar />
           <Hero />
         </div>
-        <About />
-        <Experience />
-        <Tech />
-        <Works />
-        <Feedbacks />
-        <div className='relative z-0'>
+
+        <div className="relative z-0">
           <Contact />
-          <StarsCanvas />
         </div>
       </div>
     </BrowserRouter>
   );
-}
+};
 
 export default App;
